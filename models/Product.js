@@ -10,15 +10,20 @@ const Product = sequelize.define(
       autoIncrement: true,
     },
 
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    description: {
-      type: DataTypes.TEXT,
+    size: {
+      type: DataTypes.STRING,
     },
 
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+  
     price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
@@ -27,7 +32,7 @@ const Product = sequelize.define(
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0,
+      defaultValue: 1,
     },
   },
   {
