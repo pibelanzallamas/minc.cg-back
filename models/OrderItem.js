@@ -20,11 +20,12 @@ const OrderItem = sequelize.define(
       allowNull: false,
     },
 
-     created_at: {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+
     updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -34,6 +35,8 @@ const OrderItem = sequelize.define(
   {
     tableName: "order_items",
     timestamps: false,
+    createdAt: "created_at",
+    updatedAt: "updated_at",
   }
 );
 
