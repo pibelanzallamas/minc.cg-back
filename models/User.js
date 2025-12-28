@@ -27,12 +27,24 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     tableName: "users",
     timestamps: true,
     createdAt: "created_at",
-    updatedAt: false,
+    updatedAt: "updated_at",
 
     hooks: {
       beforeCreate: async (user) => {

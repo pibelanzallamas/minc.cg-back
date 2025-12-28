@@ -15,7 +15,7 @@ app.use("/orders", orders);
 
 (async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     console.log("DB sincronizada");
   } catch (error) {
     console.error(error);
