@@ -1,7 +1,11 @@
 const express = require("express");
 const sequelize = require("./config/db.js");
 require("./models");
-import { allowedOrigins } from "./utils/allowed.js";
+
+const allowedOrigins = [
+  "http://localhost:5173/",
+  "https://my-movie-crib-back.onrender.com",
+];
 
 const users = require("./routes/users.js");
 const products = require("./routes/products");
