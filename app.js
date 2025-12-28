@@ -3,7 +3,6 @@ const cors = require("cors");
 const sequelize = require("./config/db.js");
 require("./models");
 
-
 const users = require("./routes/users.js");
 const products = require("./routes/products");
 const orders = require("./routes/orders");
@@ -13,19 +12,21 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://:5173",
+  "http://192.168.1.36:5173",
   "https://minc-cg-front.onrender.com",
 ];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // POSTMAN / CURL
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(null, false); // 👈 NUNCA tirar Error
-  },
-}));
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if (!origin) return callback(null, true); 
+//     if (allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     }
+//     return callback(null, false); 
+//   },
+// }));
+
+app.use(cors());
 
 app.use("/users", users);
 app.use("/products", products);
