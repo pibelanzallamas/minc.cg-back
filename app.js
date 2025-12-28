@@ -1,6 +1,7 @@
 const express = require("express");
 const sequelize = require("./config/db.js");
 require("./models");
+import { allowedOrigins } from "./utils/allowed.js";
 
 const users = require("./routes/users.js");
 const products = require("./routes/products");
@@ -8,6 +9,21 @@ const orders = require("./routes/orders");
 
 const app = express();
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use("/users", users);
 app.use("/products", products);
