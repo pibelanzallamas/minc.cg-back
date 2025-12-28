@@ -3,10 +3,6 @@ const cors = require("cors");
 const sequelize = require("./config/db.js");
 require("./models");
 
-const allowedOrigins = [
-  "http://localhost:5173/",
-  "https://my-movie-crib-back.onrender.com",
-];
 
 const users = require("./routes/users.js");
 const products = require("./routes/products");
@@ -15,20 +11,21 @@ const orders = require("./routes/orders");
 const app = express();
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://:5173",
+  "https://minc-cg-front.onrender.com",
+];
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // POSTMAN / CURL
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, false); // 👈 NUNCA tirar Error
+  },
+}));
 
 app.use("/users", users);
 app.use("/products", products);
