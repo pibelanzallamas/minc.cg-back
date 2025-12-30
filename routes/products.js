@@ -4,7 +4,9 @@ const Product = require("../models/Product");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const products = await Product.findAll();
+  const products = await Product.findAll({
+      order: [["id", "ASC"]],
+    });
   res.json(products);
 });
  
